@@ -9,6 +9,8 @@ models:
         data_tests:
           - unique
           - not_null
+          - positive01
+
       - name: first_order_date
         description: NULL when a customer has not yet placed an order.
 
@@ -41,3 +43,9 @@ models:
               arguments:
                 to: ref('stg_customers')
                 field: customer_id
+
+  - name: customers
+    tests:
+      - valid_date_order:
+          start_date: first_order_date
+          end_date: most_recent_order_date
